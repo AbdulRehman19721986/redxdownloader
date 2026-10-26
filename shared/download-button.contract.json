@@ -1,0 +1,30 @@
+{
+  "name": "download-flow-button",
+  "version": 1,
+  "states": ["idle", "preparing", "queued", "downloading", "complete", "error"],
+  "labels": {
+    "idle": "Download with RedX",
+    "preparing": "Preparing…",
+    "queued": "Queued",
+    "downloading": "Downloading",
+    "complete": "Saved",
+    "error": "Try again"
+  },
+  "aria": {
+    "idle": "Download with RedX Downloader",
+    "preparing": "Preparing the download",
+    "queued": "Download queued",
+    "downloading": "Downloading, {percent} percent",
+    "complete": "Download saved",
+    "error": "Download failed. Activate to try again."
+  },
+  "timing": { "sweepMs": 1100, "transitionMs": 180, "completeHoldMs": 1600 },
+  "colors": {
+    "idle": ["#4a9bff", "#1450b8"],
+    "preparing": ["#3f8bfd", "#1647a8"],
+    "queued": ["#46536a", "#1d2735"],
+    "downloading": ["#3f8bfd", "#1647a8"],
+    "complete": ["#3ad07a", "#127a45"],
+    "error": ["#ff5d5d", "#8c1a25"]
+  }
+}

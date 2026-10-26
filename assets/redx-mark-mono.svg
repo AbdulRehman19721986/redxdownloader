@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="RedX Downloader symbol">
+  <!-- Single-colour variant for tray, notification and one-colour print use. -->
+<path d="M18 14v36" fill="none" stroke="#F5F7FA" stroke-width="8" stroke-linecap="round"/>
+  <path d="M18 14h16a12 12 0 0 1 0 24H18" fill="none" stroke="#F5F7FA" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M34 34l9 17" fill="none" stroke="#F5F7FA" stroke-width="8" stroke-linecap="round"/>
+  <path d="M31.4 50.2h18.2L40.6 60z" fill="#F5F7FA"/>
+</svg>

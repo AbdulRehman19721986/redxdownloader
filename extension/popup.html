@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RedX Downloader</title>
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="identity">
+    <img src="icons/icon48.png" alt="" width="38" height="38">
+    <div><strong>RedX <span>Downloader</span></strong><small>Browser companion</small></div>
+  </div>
+  <button id="open-app" class="open-app" type="button">Open RedX</button>
+</header>
+
+<section id="connection" class="connection checking" aria-live="polite">
+  <i></i><div><strong>Checking desktop connection…</strong><small id="connection-detail">Please wait</small></div>
+</section>
+
+<section id="repair" class="repair" hidden>
+  <strong>Connect the desktop app</strong>
+  <ol><li>Open RedX Downloader.</li><li>Open Browser integration.</li><li>Register Chrome, then reload this extension.</li></ol>
+  <button id="check-again" class="button secondary" type="button">Check again</button>
+</section>
+
+<section class="card media-card">
+  <div class="section-head"><div><strong>Media on this tab</strong><small>Real formats detected for this page</small></div><em id="count">0</em></div>
+  <main id="items" class="items"></main>
+  <div class="card-actions">
+    <button id="collect" class="button secondary" type="button">Find links</button>
+    <button id="selected" class="button primary" type="button">Download selected</button>
+  </div>
+</section>
+
+<section class="card recent-card">
+  <div class="section-head"><div><strong>Recent in RedX</strong><small>Desktop download activity</small></div></div>
+  <div id="recent" class="recent"><p class="empty">Connect RedX to view recent activity.</p></div>
+</section>
+
+<section class="card controls">
+  <label class="switch-row">
+    <span><strong>Video download button</strong><small>Show the RedX button over supported videos.</small></span>
+    <input type="checkbox" id="overlay"><i></i>
+  </label>
+  <label class="switch-row">
+    <span><strong>Capture browser downloads</strong><small>RedX accepts the file first; Chrome keeps it if handoff fails.</small></span>
+    <input type="checkbox" id="intercept"><i></i>
+  </label>
+</section>
+
+<p id="status" class="status" role="status"></p>
+<footer>Local processing only · Live, encrypted and DRM streams are not supported.</footer>
+<script src="download-button.js"></script>
+<script src="popup.js"></script>
+</body>
+</html>

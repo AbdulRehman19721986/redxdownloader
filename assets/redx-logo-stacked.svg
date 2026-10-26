@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 220" width="240" height="220" role="img" aria-label="RedX Downloader">
+  <defs>
+    <linearGradient id="lk-tile" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="#1B2230"/>
+      <stop offset="1" stop-color="#0A0C11"/>
+    </linearGradient>
+    <linearGradient id="lk-red" x1="0.15" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#FF4A57"/>
+      <stop offset="0.5" stop-color="#FF2638"/>
+      <stop offset="1" stop-color="#C0111F"/>
+    </linearGradient>
+  </defs>
+  <rect x="68" y="10" width="104" height="104" rx="23" fill="url(#lk-tile)"/>
+  <rect x="69.4" y="11.4" width="101.2" height="101.2" rx="21.6" fill="none" stroke="#2C3542" stroke-width="2.4"/>
+  <svg x="68" y="10" width="104" height="104" viewBox="0 0 64 64">
+<path d="M18 14v36" fill="none" stroke="url(#lk-red)" stroke-width="8" stroke-linecap="round"/>
+  <path d="M18 14h16a12 12 0 0 1 0 24H18" fill="none" stroke="url(#lk-red)" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M34 34l9 17" fill="none" stroke="url(#lk-red)" stroke-width="8" stroke-linecap="round"/>
+  <path d="M31.4 50.2h18.2L40.6 60z" fill="#F5F7FA"/>
+  </svg>
+  <text x="120" y="157" text-anchor="middle" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="34" font-weight="800" letter-spacing="-0.6"><tspan fill="#F5F7FA">Red</tspan><tspan fill="#FF2638">X</tspan></text>
+  <text x="120" y="180" text-anchor="middle" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="11" font-weight="600" letter-spacing="5" fill="#A4ADBB">DOWNLOADER</text>
+  <text x="120" y="204" text-anchor="middle" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="9.5" font-weight="500" letter-spacing="2.4" fill="#6F7A8A">FAST · RELIABLE · SECURE</text>
+</svg>

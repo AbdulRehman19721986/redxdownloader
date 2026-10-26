@@ -1,0 +1,4 @@
+d5b3c528fe2a63b3ca4b96d8e6e45d41277dc452cd714a1a1da101601b5cd4c3  RedX-Downloader-Setup.exe
+e878d5446ff5c382b707bb55d5a00a92bb5242657afb91fdf02bb93242b7ac7c  RedX-Downloader-Portable.exe
+8b476bd819145452d3a7d611466fdcc6fd83c7b219fcae0bca5b94f8f674daba  RedX-Downloader-Extension.zip
+3beda53cca526d53b8781230fa9ff5e034f9fea181d0812ce1c539cf3cedea1c  RedX-Downloader-2.0.0-source.zip

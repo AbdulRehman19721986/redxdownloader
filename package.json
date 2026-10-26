@@ -1,0 +1,136 @@
+{
+  "name": "redx-downloader",
+  "version": "2.0.0",
+  "description": "RedX Downloader — a Windows download manager with segmented transfers, verified resume and browser video capture",
+  "main": "desktop/main.cjs",
+  "private": true,
+  "author": "Abdur Rehman Rajput (Team RedX)",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test tests/*.test.mjs integration/*.test.cjs extension/*.test.cjs",
+    "icons": "electron scripts/render-icons.cjs",
+    "preview": "electron scripts/preview.cjs",
+    "verify:ui": "node scripts/verify-ui.cjs",
+    "verify:packaged": "node scripts/verify-ui.cjs --packaged dist/win-unpacked",
+    "ui:preview": "node build/ui/preview.cjs",
+    "package": "npm run verify:ui && electron-builder --win dir && npm run verify:packaged",
+    "dist": "node scripts/verify-ui.cjs && electron-builder --win nsis --x64 --publish never && node scripts/verify-ui.cjs --packaged dist/win-unpacked",
+    "dist:portable": "node scripts/verify-ui.cjs && electron-builder --win portable --x64 --publish never",
+    "dist:all": "node scripts/verify-ui.cjs && node scripts/pack-extension.cjs && electron-builder --win nsis portable --x64 --publish never && node scripts/verify-ui.cjs --packaged dist/win-unpacked",
+    "test:browser": "node scripts/browser-e2e.cjs",
+    "pack:extension": "node scripts/pack-extension.cjs"
+  },
+  "devDependencies": {
+    "electron": "44.9.0",
+    "electron-builder": "^26.15.3",
+    "playwright": "^1.58.2"
+  },
+  "dependencies": {
+    "ffmpeg-static": "^5.3.0",
+    "googlevideo": "^5.0.1"
+  },
+  "build": {
+    "appId": "com.teamredx.downloader",
+    "productName": "RedX Downloader",
+    "executableName": "RedX-Downloader",
+    "copyright": "Copyright © 2026 Abdur Rehman Rajput — A Project of Team RedX",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "desktop/**/*",
+      "core/**/*",
+      "renderer/**/*",
+      "assets/**/*",
+      "integration/**/*",
+      "extension/**/*",
+      "THIRD-PARTY.md",
+      "LICENSE",
+      "package.json"
+    ],
+    "asar": true,
+    "extraResources": [
+      {
+        "from": "node_modules/ffmpeg-static/ffmpeg.exe.LICENSE",
+        "to": "licenses/FFmpeg-LICENSE.txt"
+      },
+      {
+        "from": "node_modules/ffmpeg-static/ffmpeg.exe.README",
+        "to": "licenses/FFmpeg-BUILD.txt"
+      },
+      {
+        "from": "node_modules/ffmpeg-static/LICENSE",
+        "to": "licenses/ffmpeg-static-LICENSE.txt"
+      },
+      {
+        "from": "node_modules/googlevideo/LICENSE",
+        "to": "licenses/googlevideo-LICENSE.txt"
+      },
+      {
+        "from": "vendor",
+        "to": "tools",
+        "filter": [
+          "yt-dlp.exe",
+          "*.txt"
+        ]
+      },
+      {
+        "from": "extension",
+        "to": "browser/extension",
+        "filter": [
+          "**/*",
+          "!*.test.cjs"
+        ]
+      },
+      {
+        "from": "integration",
+        "to": "browser/integration",
+        "filter": [
+          "native-host.exe",
+          "native-host.cjs",
+          "NativeHostLauncher.cs",
+          "README.md",
+          "register-native-host.ps1"
+        ]
+      }
+    ],
+    "asarUnpack": [
+      "node_modules/ffmpeg-static/ffmpeg.exe"
+    ],
+    "electronDist": "node_modules/electron/dist",
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico",
+      "requestedExecutionLevel": "asInvoker",
+      "signAndEditExecutable": true,
+      "legalTrademarks": "RedX Downloader is a project of Team RedX"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": "always",
+      "createStartMenuShortcut": true,
+      "shortcutName": "RedX Downloader",
+      "uninstallDisplayName": "RedX Downloader",
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "installerHeaderIcon": "build/icon.ico",
+      "deleteAppDataOnUninstall": false,
+      "artifactName": "RedX-Downloader-Setup.exe"
+    },
+    "portable": {
+      "artifactName": "RedX-Downloader-Portable.exe",
+      "requestExecutionLevel": "user"
+    }
+  }
+}

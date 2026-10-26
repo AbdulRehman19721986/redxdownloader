@@ -1,0 +1,719 @@
+﻿<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<title>RedX Downloader</title>
+<link rel="stylesheet" href="styles.css">
+<script src="app.js" defer></script>
+</head>
+<body>
+<svg class="svg-sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-mark" viewBox="0 0 64 64">
+    <rect x="1" y="1" width="62" height="62" rx="14" fill="#151B26"/>
+    <path d="M18 14v36" fill="none" stroke="#FF2638" stroke-width="8" stroke-linecap="round"/>
+    <path d="M18 14h16a12 12 0 0 1 0 24H18" fill="none" stroke="#FF2638" stroke-width="8" stroke-linejoin="round"/>
+    <path d="M34 34l9 17" fill="none" stroke="#FF2638" stroke-width="8" stroke-linecap="round"/>
+    <path d="M31.4 50.2h18.2L40.6 60z" fill="#F5F7FA"/>
+  </symbol>
+  <symbol id="i-brandx" viewBox="0 0 32 32">
+    <path d="M6 3v26" fill="none" stroke="#FF2A3C" stroke-width="5.4" stroke-linecap="round"/>
+    <path d="M6 3h9.5a7.6 7.6 0 0 1 0 15.2H6" fill="none" stroke="#FF2A3C" stroke-width="5.4" stroke-linejoin="round"/>
+    <path d="M16 18.2l6.4 10.8" fill="none" stroke="#FF2A3C" stroke-width="5.4" stroke-linecap="round"/>
+    <path d="M14.6 27.4h13L21.1 33z" fill="#F3F6FA"/>
+  </symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M9 5v14M15 5v14"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z"/></symbol>
+  <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5l1.6 2.6 3-.6 1 2.9 2.7 1.5-1.2 2.9 1.2 2.9-2.7 1.5-1 2.9-3-.6L12 21.5l-1.6-2.6-3 .6-1-2.9L3.7 15l1.2-2.9L3.7 9.2 6.4 7.7l1-2.9 3 .6z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c4 4.5 4 12.5 0 17M12 3.5c-4 4.5-4 12.5 0 17"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7.5A1.5 1.5 0 0 1 4.5 6h4l2 2.5h7.5A1.5 1.5 0 0 1 20 10v8a1.5 1.5 0 0 1-1.5 1.5h-14A1.5 1.5 0 0 1 3 18z"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="5.5" width="13" height="13" rx="2.5"/><path d="M16 10l5-3v10l-5-3z"/></symbol>
+  <symbol id="i-audio" viewBox="0 0 24 24"><path d="M9 18V6l11-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></symbol>
+  <symbol id="i-archive" viewBox="0 0 24 24"><rect x="4" y="3.5" width="16" height="17" rx="2"/><path d="M12 3.5v4M12 8.5v3M12 12.5v3"/></symbol>
+  <symbol id="i-program" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/><path d="M3.5 9h17M8 13h3M8 16h6"/></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="M4.5 17l5-5 3.5 3.5 3-2.5 4 4"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3.5L22 20H2z"/><path d="M12 9.5v5M12 17.5v.5"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v6c0 4.5-3 7.5-7.5 9-4.5-1.5-7.5-4.5-7.5-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></symbol>
+  <symbol id="i-graph" viewBox="0 0 24 24"><path d="M3.5 20V4M3.5 20H21"/><path d="M6.5 15l3.5-4 3 2.5 5-6.5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+  <symbol id="i-square" viewBox="0 0 24 24"><rect x="5.5" y="5.5" width="13" height="13" rx="1.5"/></symbol>
+  <symbol id="i-restore" viewBox="0 0 24 24"><rect x="4" y="7" width="12" height="12" rx="1.5"/><path d="M8 7V4.5h11.5V16H17"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V6M6 11l6-6 6 6"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v13M6 13l6 6 6-6"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></symbol>
+  <symbol id="i-disc" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.6"/><path d="M12 3a9 9 0 0 1 6.4 2.7"/></symbol>
+  <symbol id="i-film" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18M3 15h18M8 4.5v15M16 4.5v15"/></symbol>
+  <symbol id="i-app" viewBox="0 0 24 24"><path d="M4 7l8-3.5L20 7v10l-8 3.5L4 17z"/><path d="M4 7l8 3.5L20 7M12 10.5V20.5"/></symbol>
+  <symbol id="i-hand" viewBox="0 0 24 24"><path d="M8 11V6.5a1.6 1.6 0 0 1 3.2 0V11m0-1.2V5.2a1.6 1.6 0 0 1 3.2 0V11m0-.8V6.8a1.6 1.6 0 0 1 3.2 0V14a6.4 6.4 0 0 1-6.4 6.4h-1a6 6 0 0 1-4.5-2L4.4 15a1.7 1.7 0 0 1 2.5-2.3L8 14"/></symbol>
+  <symbol id="i-queue" viewBox="0 0 24 24"><path d="M4 7h9M4 12h9M4 17h6"/><path d="M16 8.5l5 3.5-5 3.5z"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L4.5 13.5H11l-1 8.5 9-12h-6.5z"/></symbol>
+</svg>
+
+<!-- Window chrome --------------------------------------------------------- -->
+<header class="titlebar" id="titlebar">
+  <div class="titlebar-brand">
+    <svg class="brand-mark" aria-hidden="true"><use href="#i-brandx"/></svg>
+    <span class="brand-word">RedX <b>Downloader</b> <span class="brand-version" id="brand-version">2.0</span></span>
+    <span class="brand-tag">Fast · Reliable · Secure</span>
+  </div>
+  <div class="titlebar-drag"></div>
+  <div class="window-controls">
+    <button class="win-btn" id="win-min" aria-label="Minimise"><svg><use href="#i-minus"/></svg></button>
+    <button class="win-btn" id="win-max" aria-label="Maximise"><svg><use href="#i-square"/></svg></button>
+    <button class="win-btn close" id="win-close" aria-label="Close to tray"><svg><use href="#i-x"/></svg></button>
+  </div>
+</header>
+
+<!-- Menu bar -------------------------------------------------------------- -->
+<nav class="menubar" id="menubar" aria-label="Application menu">
+  <div class="menu">
+    <button class="menu-btn" type="button" aria-haspopup="true" aria-expanded="false">Tasks</button>
+    <div class="menu-pop" role="menu">
+      <button type="button" role="menuitem" data-command="add"><svg><use href="#i-plus"/></svg>Add new download…<kbd>Ctrl+N</kbd></button>
+      <button type="button" role="menuitem" data-command="paste"><svg><use href="#i-copy"/></svg>Add from clipboard</button>
+      <span class="menu-sep"></span>
+      <button type="button" role="menuitem" data-command="resumeAll"><svg><use href="#i-play"/></svg>Resume all</button>
+      <button type="button" role="menuitem" data-command="pauseAll"><svg><use href="#i-pause"/></svg>Stop all</button>
+      <button type="button" role="menuitem" data-command="removeCompleted"><svg><use href="#i-check"/></svg>Delete completed</button>
+      <span class="menu-sep"></span>
+      <button type="button" role="menuitem" data-command="exit"><svg><use href="#i-x"/></svg>Exit RedX</button>
+    </div>
+  </div>
+  <div class="menu">
+    <button class="menu-btn" type="button" aria-haspopup="true" aria-expanded="false">File</button>
+    <div class="menu-pop" role="menu">
+      <button type="button" role="menuitem" data-command="add"><svg><use href="#i-plus"/></svg>New download…</button>
+      <button type="button" role="menuitem" data-command="scheduler"><svg><use href="#i-clock"/></svg>Scheduler…</button>
+      <span class="menu-sep"></span>
+      <button type="button" role="menuitem" data-command="settings"><svg><use href="#i-settings"/></svg>Options…<kbd>Ctrl+,</kbd></button>
+      <button type="button" role="menuitem" data-command="exit"><svg><use href="#i-x"/></svg>Exit</button>
+    </div>
+  </div>
+  <div class="menu">
+    <button class="menu-btn" type="button" aria-haspopup="true" aria-expanded="false">Downloads</button>
+    <div class="menu-pop" role="menu">
+      <button type="button" role="menuitem" data-command="details"><svg><use href="#i-file"/></svg>Details of selected</button>
+      <button type="button" role="menuitem" data-command="verify"><svg><use href="#i-shield"/></svg>Verify checksum</button>
+      <button type="button" role="menuitem" data-command="remove"><svg><use href="#i-trash"/></svg>Remove from list<kbd>Del</kbd></button>
+      <span class="menu-sep"></span>
+      <button type="button" role="menuitem" data-command="selectAll"><svg><use href="#i-check"/></svg>Select all<kbd>Ctrl+A</kbd></button>
+      <button type="button" role="menuitem" data-command="all"><svg><use href="#i-folder"/></svg>Show all downloads</button>
+    </div>
+  </div>
+  <div class="menu">
+    <button class="menu-btn" type="button" aria-haspopup="true" aria-expanded="false">View</button>
+    <div class="menu-pop" role="menu">
+      <button type="button" role="menuitem" data-command="find"><svg><use href="#i-search"/></svg>Find downloads…<kbd>Ctrl+F</kbd></button>
+      <button type="button" role="menuitem" data-command="toggleNetwork"><svg><use href="#i-graph"/></svg>Network monitor</button>
+      <button type="button" role="menuitem" data-command="toggleSidebar"><svg><use href="#i-chevron"/></svg>Category panel</button>
+      <span class="menu-sep"></span>
+      <button type="button" role="menuitem" data-command="fullscreen"><svg><use href="#i-square"/></svg>Full screen<kbd>F11</kbd></button>
+      <span class="menu-sep"></span>
+      <p class="menu-label">Columns</p>
+      <button type="button" role="menuitemcheckbox" data-column="size"><span class="menu-check">✓</span>Size</button>
+      <button type="button" role="menuitemcheckbox" data-column="progress"><span class="menu-check">✓</span>Progress</button>
+      <button type="button" role="menuitemcheckbox" data-column="status"><span class="menu-check">✓</span>Status</button>
+      <button type="button" role="menuitemcheckbox" data-column="rate"><span class="menu-check">✓</span>Transfer rate</button>
+      <button type="button" role="menuitemcheckbox" data-column="time"><span class="menu-check">✓</span>Time left</button>
+      <span class="menu-sep"></span>
+      <button type="button" role="menuitem" data-command="diagnostics"><svg><use href="#i-alert"/></svg>Diagnostics…</button>
+    </div>
+  </div>
+  <div class="menu">
+    <button class="menu-btn" type="button" aria-haspopup="true" aria-expanded="false">Help</button>
+    <div class="menu-pop" role="menu">
+      <button type="button" role="menuitem" data-command="about"><svg><use href="#i-mark"/></svg>About RedX Downloader</button>
+      <button type="button" role="menuitem" data-command="integration"><svg><use href="#i-globe"/></svg>Browser integration…</button>
+      <button type="button" role="menuitem" data-command="openLogs"><svg><use href="#i-folder"/></svg>Open log folder</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Command ribbon -------------------------------------------------------- -->
+<nav class="ribbon" aria-label="Main commands">
+  <div class="ribbon-groups">
+    <div class="ribbon-group">
+      <button class="cmd primary" id="ribbon-add" type="button" title="Add a new download address (Ctrl+N)">
+        <span class="cmd-icon"><svg><use href="#i-plus"/></svg></span><span class="cmd-label">Add URL</span>
+      </button>
+    </div>
+    <span class="ribbon-sep"></span>
+    <div class="ribbon-group">
+      <button class="cmd" id="ribbon-resume" type="button" title="Resume the selected download">
+        <span class="cmd-icon blue"><svg><use href="#i-play"/></svg></span><span class="cmd-label">Resume</span>
+      </button>
+      <button class="cmd" id="ribbon-stop" type="button" title="Stop the selected download">
+        <span class="cmd-icon red"><svg><use href="#i-stop"/></svg></span><span class="cmd-label">Stop</span>
+      </button>
+      <button class="cmd" id="ribbon-stop-all" type="button" title="Stop every active transfer">
+        <span class="cmd-icon red"><svg><use href="#i-pause"/></svg></span><span class="cmd-label">Stop All</span>
+      </button>
+    </div>
+    <span class="ribbon-sep"></span>
+    <div class="ribbon-group">
+      <button class="cmd" id="ribbon-delete" type="button" title="Delete the selected downloads">
+        <span class="cmd-icon red"><svg><use href="#i-trash"/></svg></span><span class="cmd-label">Delete</span>
+      </button>
+      <button class="cmd" id="ribbon-delete-completed" type="button" title="Clear the completed downloads from the list">
+        <span class="cmd-icon red"><svg><use href="#i-check"/></svg></span><span class="cmd-label">Delete Completed</span>
+      </button>
+    </div>
+    <span class="ribbon-sep"></span>
+    <div class="ribbon-group">
+      <button class="cmd" id="ribbon-options" type="button" title="Options and preferences">
+        <span class="cmd-icon steel"><svg><use href="#i-settings"/></svg></span><span class="cmd-label">Options</span>
+      </button>
+      <button class="cmd" id="ribbon-scheduler" type="button" title="Download scheduler">
+        <span class="cmd-icon steel"><svg><use href="#i-clock"/></svg></span><span class="cmd-label">Scheduler</span>
+      </button>
+    </div>
+    <span class="ribbon-sep"></span>
+    <div class="ribbon-group">
+      <button class="cmd" id="ribbon-start-queue" type="button" title="Start the download queue">
+        <span class="cmd-icon blue"><svg><use href="#i-queue"/></svg></span><span class="cmd-label">Start Queue</span>
+      </button>
+      <button class="cmd" id="ribbon-stop-queue" type="button" title="Stop the download queue">
+        <span class="cmd-icon red"><svg><use href="#i-hand"/></svg></span><span class="cmd-label">Stop Queue</span>
+      </button>
+    </div>
+  </div>
+  <div class="gauge" id="speed-gauge" title="Total transfer rate">
+    <span class="gauge-value" id="gauge-value">0.0</span>
+    <span class="gauge-unit" id="gauge-unit">MB/s</span>
+  </div>
+</nav>
+
+<div class="app" id="app">
+  <aside class="sidebar" aria-label="Download library">
+    <div class="side-head">
+      <span>Categories</span>
+      <button class="side-collapse" id="sidebar-collapse" type="button" title="Collapse the category panel" aria-label="Collapse the category panel"><svg><use href="#i-chevron"/></svg></button>
+    </div>
+    <nav class="nav" aria-label="Filters">
+      <button class="nav-item active" data-filter="all"><i class="ni blue"><svg><use href="#i-folder"/></svg></i><span>All Downloads</span><em id="count-all">0</em></button>
+      <button class="nav-item" data-filter="active"><i class="ni blue"><svg><use href="#i-play"/></svg></i><span>Unfinished</span><em id="count-active">0</em></button>
+      <button class="nav-item" data-filter="completed"><i class="ni green"><svg><use href="#i-check"/></svg></i><span>Finished</span><em id="count-completed">0</em></button>
+      <button class="nav-item" data-filter="scheduled"><i class="ni amber"><svg><use href="#i-clock"/></svg></i><span>Scheduled</span><em id="count-scheduled">0</em></button>
+      <button class="nav-item" data-filter="failed"><i class="ni red"><svg><use href="#i-alert"/></svg></i><span>Failed</span><em id="count-failed">0</em></button>
+      <p class="nav-label">Media Types</p>
+      <button class="nav-item" data-category="Archives"><i class="ni amber"><svg><use href="#i-archive"/></svg></i><span>Compressed</span><em id="count-Archives">0</em></button>
+      <button class="nav-item" data-category="Documents"><i class="ni sky"><svg><use href="#i-file"/></svg></i><span>Documents</span><em id="count-Documents">0</em></button>
+      <button class="nav-item" data-category="Audio"><i class="ni violet"><svg><use href="#i-audio"/></svg></i><span>Music</span><em id="count-Audio">0</em></button>
+      <button class="nav-item" data-category="Programs"><i class="ni teal"><svg><use href="#i-program"/></svg></i><span>Programs</span><em id="count-Programs">0</em></button>
+      <button class="nav-item" data-category="Video"><i class="ni red"><svg><use href="#i-video"/></svg></i><span>Video</span><em id="count-Video">0</em></button>
+      <button class="nav-item" data-category="Images"><i class="ni green"><svg><use href="#i-image"/></svg></i><span>Images</span><em id="count-Images">0</em></button>
+      <button class="nav-item" data-category="Other"><i class="ni steel"><svg><use href="#i-file"/></svg></i><span>Other</span><em id="count-Other">0</em></button>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="integration-card" id="integration-button" type="button">
+        <span class="dot" id="integration-dot"></span>
+        <span class="integration-text">
+          <strong>Browser integration</strong>
+          <small id="integration-label">Checking…</small>
+        </span>
+        <svg aria-hidden="true"><use href="#i-chevron"/></svg>
+      </button>
+      <div class="sidebar-links">
+        <button id="settings-button" type="button"><svg><use href="#i-settings"/></svg>Settings</button>
+        <button id="about-button" type="button">About</button>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main" aria-label="Downloads">
+    <header class="viewbar">
+      <div class="headings">
+        <h1 id="view-title">All Downloads</h1>
+        <p id="view-subtitle">Connecting…</p>
+      </div>
+      <div class="viewbar-tools">
+        <label class="search">
+          <svg aria-hidden="true"><use href="#i-search"/></svg>
+          <input id="search" type="search" placeholder="Search downloads" aria-label="Search downloads" spellcheck="false">
+        </label>
+        <div class="tool-group" role="group" aria-label="Queue controls">
+          <button class="icon-btn" id="resume-all" type="button" title="Start queue" aria-label="Start queue"><svg><use href="#i-play"/></svg></button>
+          <button class="icon-btn" id="pause-all" type="button" title="Stop all" aria-label="Stop all"><svg><use href="#i-pause"/></svg></button>
+          <button class="icon-btn" id="scheduler-button" type="button" title="Scheduler" aria-label="Scheduler"><svg><use href="#i-clock"/></svg></button>
+          <button class="icon-btn" id="remove-completed" type="button" title="Remove completed" aria-label="Remove completed downloads"><svg><use href="#i-trash"/></svg></button>
+          <button class="icon-btn" id="graph-button" type="button" title="Live network monitor" aria-label="Toggle network monitor" aria-pressed="true"><svg><use href="#i-graph"/></svg></button>
+        </div>
+      </div>
+    </header>
+
+    <section class="table-panel" id="table-panel">
+      <div class="grid-head" role="row">
+        <button class="th name-col" type="button" data-sort="filename">File Name</button>
+        <span class="th size-col">Size</span>
+        <button class="th progress-col" type="button" data-sort="progress">Progress</button>
+        <button class="th status-col" type="button" data-sort="status">Status</button>
+        <span class="th rate-col">Transfer Rate</span>
+        <span class="th time-col">Time Left</span>
+        <span class="th actions-col"></span>
+      </div>
+      <div class="grid-body" id="download-list" role="rowgroup" aria-live="polite" aria-busy="true"></div>
+      <div class="empty-state" id="empty-state" hidden>
+        <svg class="empty-mark" aria-hidden="true"><use href="#i-mark"/></svg>
+        <h2 id="empty-title">No downloads yet</h2>
+        <p id="empty-text">Paste a link or press <kbd>Ctrl</kbd> + <kbd>N</kbd> to start your first download.</p>
+        <button class="btn primary" id="empty-add" type="button"><svg><use href="#i-plus"/></svg>Add Download</button>
+      </div>
+      <div class="bulk-bar" id="bulk-bar" hidden>
+        <span><b id="bulk-count">0</b> selected</span>
+        <span class="foot-divider"></span>
+        <button class="btn small" id="bulk-select-all" type="button">Select all in view</button>
+        <button class="btn small" id="bulk-clear" type="button">Clear</button>
+        <span class="spacer"></span>
+        <button class="btn small" id="bulk-pause" type="button">Pause</button>
+        <button class="btn small" id="bulk-resume" type="button">Resume</button>
+        <button class="btn small" id="bulk-retry" type="button">Retry</button>
+        <button class="btn small" id="bulk-remove" type="button">Remove from list</button>
+        <button class="btn small danger" id="bulk-delete" type="button">Delete files…</button>
+      </div>
+    </section>
+
+    <section class="network" id="network-panel" aria-label="Live network monitor">
+      <header class="network-head">
+        <div class="network-title">
+          <svg aria-hidden="true"><use href="#i-graph"/></svg>
+          <strong>Live network</strong>
+          <span class="badge" id="network-state">Idle</span>
+        </div>
+        <div class="network-metrics">
+          <span><small>Now</small><b id="net-now">0 B/s</b></span>
+          <span><small>Average</small><b id="net-avg">0 B/s</b></span>
+          <span><small>Session</small><b id="net-total">0 B</b></span>
+          <span><small>Active</small><b id="net-active">0</b></span>
+        </div>
+      </header>
+      <div class="graph-wrap"><canvas id="speed-graph" aria-label="Download speed over the last minute"></canvas></div>
+    </section>
+  </main>
+
+  <aside class="inspector" id="inspector" aria-label="Download details" hidden>
+    <header class="inspector-head">
+      <h2 id="inspector-title">Details</h2>
+      <button class="icon-btn" id="inspector-close" type="button" aria-label="Close details"><svg><use href="#i-x"/></svg></button>
+    </header>
+    <div class="inspector-body" id="inspector-body"></div>
+  </aside>
+</div>
+
+<footer class="statusbar" aria-label="Download summary">
+  <span class="sb-item sb-speed"><svg aria-hidden="true"><use href="#i-bolt"/></svg><b id="foot-speed">0 B/s</b></span>
+  <span class="sb-sep"></span>
+  <span class="sb-item">Downloads: <b id="list-count">0 of 0</b></span>
+  <span class="sb-sep"></span>
+  <span class="sb-item">Total Size: <b id="foot-size">0 B</b></span>
+  <span class="sb-sep"></span>
+  <span class="sb-item">Completed: <b id="completed-count">0</b></span>
+  <span class="spacer"></span>
+  <span class="sb-item sb-conn">Connection: <i class="dot" id="conn-dot"></i><b id="conn-state">Online</b></span>
+</footer>
+
+<div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+
+<!-- Progress window ------------------------------------------------------- -->
+<section class="progress-view" id="progress-view" hidden>
+  <header class="p-head">
+    <div class="p-logo">
+      <svg class="p-mark" aria-hidden="true"><use href="#i-brandx"/></svg>
+      <span class="p-logo-text">RedX<small>DOWNLOADER</small></span>
+    </div>
+    <div class="p-headline">
+      <b id="p-pct-head">0%</b>
+      <span class="p-bullet">•</span>
+      <strong id="p-title">Preparing…</strong>
+      <span class="p-sub" id="p-sub"></span>
+    </div>
+    <span class="p-status" id="p-status">Downloading</span>
+    <div class="p-win">
+      <button class="win-btn" id="p-min" type="button" aria-label="Minimise"><svg><use href="#i-minus"/></svg></button>
+      <button class="win-btn close" id="p-close" type="button" aria-label="Close this window (the download continues)"><svg><use href="#i-x"/></svg></button>
+    </div>
+  </header>
+
+  <nav class="p-tabs" role="tablist">
+    <button class="active" data-ptab="status" role="tab" aria-selected="true" type="button">Download status</button>
+    <button data-ptab="limit" role="tab" aria-selected="false" type="button">Speed Limiter</button>
+    <button data-ptab="options" role="tab" aria-selected="false" type="button">Options on completion</button>
+  </nav>
+
+  <div class="p-body">
+    <section class="p-panel" data-ppanel="status" role="tabpanel">
+      <div class="p-sheet">
+        <dl class="p-rows">
+          <div class="p-row"><dt>URL</dt><dd class="p-url-cell"><input id="p-url" readonly spellcheck="false" aria-label="Source address"><button class="link-btn" id="p-copy" type="button">Copy</button></dd></div>
+          <div class="p-row"><dt>Status</dt><dd class="p-blue" id="p-state">Receiving data…</dd></div>
+          <div class="p-row"><dt>File size</dt><dd id="p-total">—</dd></div>
+          <div class="p-row"><dt>Downloaded</dt><dd id="p-size">—</dd></div>
+          <div class="p-row"><dt>Transfer rate</dt><dd class="p-green" id="p-speed">—</dd></div>
+          <div class="p-row"><dt>Time left</dt><dd id="p-eta">—</dd></div>
+          <div class="p-row"><dt>Resume capability</dt><dd class="p-green" id="p-resume-cap">—</dd></div>
+          <div class="p-row"><dt>Connections</dt><dd id="p-conn">—</dd></div>
+        </dl>
+      </div>
+
+      <div class="p-bar-wrap">
+        <div class="bar large"><i id="p-bar"></i><span id="p-pct">0%</span></div>
+      </div>
+
+      <section class="p-streams">
+        <h4 id="p-streams-title">Start positions and download progress by connections</h4>
+        <div class="p-segments" id="p-segments"></div>
+      </section>
+
+      <p class="progress-note" id="p-note"></p>
+      <div class="p-links">
+        <button class="link-btn" id="p-open" type="button" hidden>Open file</button>
+        <button class="link-btn" id="p-folder" type="button">Open folder</button>
+        <button class="link-btn" id="p-main" type="button" title="Open the full RedX Downloader window">Open RedX</button>
+      </div>
+      <div class="p-details" id="p-details" hidden></div>
+    </section>
+
+    <section class="p-panel" data-ppanel="limit" role="tabpanel" hidden>
+      <div class="p-sheet">
+        <label class="field"><span>Speed limit for this download</span>
+          <select id="p-limit">
+            <option value="0">No individual limit</option>
+            <option value="256">256 KB/s</option>
+            <option value="512">512 KB/s</option>
+            <option value="1024">1 MB/s</option>
+            <option value="2048">2 MB/s</option>
+            <option value="4096">4 MB/s</option>
+            <option value="8192">8 MB/s</option>
+          </select>
+        </label>
+        <p class="hint">A limit set in Options still applies on top of this one.</p>
+      </div>
+    </section>
+
+    <section class="p-panel" data-ppanel="options" role="tabpanel" hidden>
+      <div class="p-sheet">
+        <label class="field"><span>When this download finishes</span>
+          <select id="p-oncomplete">
+            <option value="default">Use my notification settings</option>
+            <option value="none">Do nothing</option>
+            <option value="notify">Show a notification</option>
+            <option value="open">Open the destination folder</option>
+          </select>
+        </label>
+        <p class="hint">This choice is stored with the download and survives a restart.</p>
+      </div>
+    </section>
+  </div>
+
+  <footer class="p-foot">
+    <button class="p-btn" id="p-toggle" type="button" aria-expanded="false"><span class="p-chev">«</span> Details</button>
+    <span class="spacer"></span>
+    <button class="p-btn action" id="p-pause" type="button">Pause</button>
+    <button class="p-btn danger" id="p-cancel" type="button">Cancel</button>
+  </footer>
+</section>
+
+<!-- Dialogs --------------------------------------------------------------- -->
+<dialog id="add-dialog" aria-labelledby="add-title">
+  <form id="add-form" class="dialog">
+    <header class="dialog-head">
+      <h2 id="add-title">New download</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close"><svg><use href="#i-x"/></svg></button>
+    </header>
+    <div class="dialog-body">
+      <label class="field">
+        <span>Address</span>
+        <textarea id="download-urls" rows="3" required spellcheck="false" placeholder="https://example.com/file.zip"></textarea>
+        <small>One address per line for a batch download.</small>
+      </label>
+      <div class="field-row">
+        <label class="field"><span>Save to</span>
+          <span class="input-with-button"><input id="add-directory" readonly><button type="button" class="btn small" id="add-browse">Browse</button></span>
+        </label>
+        <label class="field narrow"><span>Category</span>
+          <select id="download-category">
+            <option value="">Automatic</option><option>Video</option><option>Audio</option><option>Documents</option>
+            <option>Programs</option><option>Archives</option><option>Images</option><option>Other</option>
+          </select>
+        </label>
+      </div>
+      <div class="field-row">
+        <label class="field"><span>File name <small>(optional)</small></span><input id="download-filename" maxlength="240" placeholder="Keep the suggested name"></label>
+        <label class="field narrow"><span>Priority</span>
+          <select id="download-priority"><option value="9">High</option><option value="5" selected>Normal</option><option value="1">Low</option></select>
+        </label>
+        <label class="field narrow"><span>Quality <small>(TikTok/X)</small></span>
+          <select id="download-quality"><option value="best" selected>Best</option><option>2160p</option><option>1440p</option><option>1080p</option><option>720p</option><option>480p</option><option>360p</option></select>
+        </label>
+      </div>
+      <div class="field-row">
+        <label class="field"><span>Start at <small>(optional)</small></span><input id="download-schedule" type="datetime-local"></label>
+        <label class="field"><span>SHA-256 <small>(optional)</small></span><input id="download-checksum" maxlength="64" spellcheck="false" placeholder="Expected checksum"></label>
+      </div>
+      <label class="field"><span>Description <small>(optional)</small></span><input id="download-description" maxlength="1000"></label>
+      <p class="form-error" id="add-error" role="alert" hidden></p>
+      <p class="field-help" id="add-duplicate" hidden></p>
+    </div>
+    <footer class="dialog-foot">
+      <button type="button" class="btn" id="paste-button"><svg><use href="#i-copy"/></svg>Paste</button>
+      <span class="spacer"></span>
+      <button type="button" class="btn" data-close>Cancel</button>
+      <button type="submit" class="btn" value="later" id="add-later">Download later</button>
+      <button type="submit" class="btn primary" value="start" id="add-submit">Start download</button>
+    </footer>
+  </form>
+</dialog>
+
+<dialog id="settings-dialog" aria-labelledby="settings-title" class="wide-dialog">
+  <div class="dialog settings-dialog">
+    <header class="dialog-head">
+      <h2 id="settings-title">Settings</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close"><svg><use href="#i-x"/></svg></button>
+    </header>
+    <div class="settings-layout">
+      <nav class="settings-nav" aria-label="Settings sections">
+        <button class="active" data-section="appearance">Appearance</button>
+        <button data-section="downloads">Downloads</button>
+        <button data-section="speed">Speed &amp; connections</button>
+        <button data-section="queue">Queue &amp; scheduler</button>
+        <button data-section="browser">Browser integration</button>
+        <button data-section="clipboard">Clipboard</button>
+        <button data-section="notifications">Notifications</button>
+        <button data-section="integrity">Integrity</button>
+        <button data-section="diagnostics">Diagnostics</button>
+        <button data-section="about">About</button>
+      </nav>
+      <div class="settings-panels" id="settings-form">
+        <section class="settings-panel" data-panel="appearance">
+          <h3>Appearance</h3>
+          <p class="panel-note">The accent colour stays the same in both themes, so the grid reads identically.</p>
+          <div class="field-row">
+            <label class="field"><span>Theme</span>
+              <select id="set-theme" data-setting="theme"><option value="dark">Dark</option><option value="light">Light</option></select>
+            </label>
+            <label class="field"><span>Toolbar skin</span>
+              <select id="set-skin">
+                <option value="steel">Steel (default)</option>
+                <option value="midnight">Midnight</option>
+                <option value="ice">Ice</option>
+              </select>
+            </label>
+          </div>
+          <label class="switch"><input type="checkbox" data-setting="showSpeedGraph"><span></span><em>Show the live network monitor<small>Disable it to save a little CPU on older machines.</small></em></label>
+        </section>
+        <section class="settings-panel" data-panel="downloads" hidden>
+          <h3>Downloads</h3>
+          <label class="field"><span>Default folder</span>
+            <span class="input-with-button"><input id="set-directory" data-setting="defaultDirectory"><button type="button" class="btn small" id="choose-directory">Browse</button></span>
+          </label>
+          <label class="field"><span>Browser download start</span>
+            <select data-setting="browserStartBehavior">
+              <option value="auto">Start automatically after quality selection</option>
+              <option value="ask">Ask every time</option>
+              <option value="queue">Add to queue for later</option>
+            </select>
+            <small>Applies when a browser sends a video or file to RedX.</small>
+          </label>
+          <label class="switch"><input type="checkbox" data-setting="organizeByCategory"><span></span><em>Organise new downloads into category folders<small>Video, Music, Documents and the rest get their own subfolder unless a folder is set below.</small></em></label>
+          <div class="folder-grid" id="category-folders"></div>
+        </section>
+        <section class="settings-panel" data-panel="speed" hidden>
+          <h3>Connections &amp; speed</h3>
+          <p class="panel-note">More connections only help when the server supports byte ranges; RedX falls back to a single stream otherwise.</p>
+          <div class="field-row">
+            <label class="field"><span>Simultaneous downloads</span><input type="number" min="1" max="16" data-setting="maxConcurrent"></label>
+            <label class="field"><span>Connections per file</span><input type="number" min="1" max="32" data-setting="connections"></label>
+          </div>
+          <div class="field-row">
+            <label class="field"><span>Global speed limit</span>
+              <select data-setting="speedLimitKbps">
+                <option value="0">Unlimited — use full available bandwidth</option>
+                <option value="512">512 KB/s</option>
+                <option value="1024">1 MB/s</option>
+                <option value="2048">2 MB/s</option>
+                <option value="4096">4 MB/s</option>
+                <option value="8192">8 MB/s</option>
+                <option value="16384">16 MB/s</option>
+              </select>
+            </label>
+            <label class="field"><span>Stall timeout (seconds)</span><input type="number" min="5" max="300" data-setting="stallTimeoutSec"></label>
+          </div>
+          <label class="field narrow"><span>Retries per connection</span><input type="number" min="1" max="10" data-setting="retryLimit"></label>
+        </section>
+        <section class="settings-panel" data-panel="queue" hidden>
+          <h3>Queue &amp; scheduler</h3>
+          <p class="panel-note">Scheduled downloads start at your local system time while RedX is running. Priorities decide which queued item starts first; the download list can reorder items with the arrow buttons.</p>
+          <div class="inline-actions">
+            <button type="button" class="btn" id="open-scheduler">Open scheduler</button>
+            <button type="button" class="btn" id="start-queue">Start queue</button>
+            <button type="button" class="btn" id="stop-queue">Stop queue</button>
+          </div>
+          <p class="field-help">Waiting items: <b id="queue-count">0</b> · Scheduled: <b id="scheduled-count">0</b></p>
+        </section>
+        <section class="settings-panel" data-panel="clipboard" hidden>
+          <h3>Clipboard monitor</h3>
+          <label class="switch"><input type="checkbox" data-setting="clipboardMonitor"><span></span><em>Offer to download links I copy<small>RedX reads the clipboard only while this is on, checks whether the text is a single download link, and stores nothing else.</small></em></label>
+          <p class="panel-note">Nothing is added automatically: a small prompt appears with a Download now action.</p>
+        </section>
+        <section class="settings-panel" data-panel="browser" hidden>
+          <h3>Browser &amp; video overlay</h3>
+          <p class="panel-note" id="browser-status">Checking…</p>
+          <div class="inline-actions">
+            <button type="button" class="btn" id="open-integration">Browser setup</button>
+            <button type="button" class="btn" id="copy-extension">Copy extension folder</button>
+          </div>
+          <label class="field"><span>Browser session for extraction <small>(optional)</small></span>
+            <select data-setting="cookiesFromBrowser">
+              <option value="">Never use browser data</option>
+              <option value="chrome">Chrome profile</option>
+              <option value="edge">Edge profile</option>
+              <option value="firefox">Firefox profile</option>
+              <option value="brave">Brave profile</option>
+            </select>
+            <small>Only used when a site needs your own signed-in session. The extractor reads it locally on this PC; nothing is uploaded or written to logs.</small>
+          </label>
+          <p class="field-help">The “Download” button over videos is controlled inside the extension popup, so the setting always matches the browser you are using.</p>
+        </section>
+        <section class="settings-panel" data-panel="notifications" hidden>
+          <h3>Notifications</h3>
+          <label class="switch"><input type="checkbox" data-setting="notifyOnComplete"><span></span><em>Show a Windows notification when a download completes</em></label>
+          <label class="switch"><input type="checkbox" data-setting="revealOnComplete"><span></span><em>Open the folder when a download completes</em></label>
+          <label class="switch"><input type="checkbox" data-setting="hideCompletionDialog"><span></span><em>Hide the completion window automatically</em></label>
+        </section>
+        <section class="settings-panel" data-panel="integrity" hidden>
+          <h3>File integrity</h3>
+          <label class="switch"><input type="checkbox" data-setting="verifyAfterDownload"><span></span><em>Calculate SHA-256 after every download<small>Comparing a checksum proves the bytes are intact; matching file sizes alone does not.</small></em></label>
+          <p class="panel-note">Open any completed download to see its checksum, or supply an expected SHA-256 when adding a link.</p>
+        </section>
+        <section class="settings-panel" data-panel="about" hidden>
+          <h3>About RedX Downloader</h3>
+          <div class="about-inline">
+            <svg class="about-inline-mark" aria-hidden="true"><use href="#i-mark"/></svg>
+            <div>
+              <strong>RedX Downloader <span id="settings-version">1.0.0</span></strong>
+              <p>Owner &amp; Developed by <b>Abdur Rehman Rajput</b></p>
+              <p>A Project of <b class="red">Team RedX</b></p>
+            </div>
+          </div>
+          <p class="panel-note">Segmented downloads, verified resume, SHA-256 checks, browser handoff and YouTube/TikTok/X extraction in one Windows application.</p>
+          <div class="inline-actions">
+            <button type="button" class="btn" id="about-open">Open the About card</button>
+          </div>
+        </section>
+        <section class="settings-panel" data-panel="diagnostics" hidden>
+          <h3>Diagnostics</h3>
+          <dl class="diag-list" id="diag-list"></dl>
+          <div class="inline-actions">
+            <button type="button" class="btn" id="open-logs">Open logs folder</button>
+            <button type="button" class="btn" id="copy-diagnostics">Copy diagnostics</button>
+          </div>
+          <pre class="log-tail" id="log-tail"></pre>
+        </section>
+      </div>
+    </div>
+    <footer class="dialog-foot">
+      <span class="save-state" id="settings-state"></span>
+      <span class="spacer"></span>
+      <button type="button" class="btn" data-close>Cancel</button>
+      <button type="button" class="btn primary" id="settings-save">Save changes</button>
+    </footer>
+  </div>
+</dialog>
+
+<dialog id="integration-dialog" aria-labelledby="integration-title" class="wide-dialog">
+  <div class="dialog">
+    <header class="dialog-head">
+      <h2 id="integration-title">Browser integration</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close"><svg><use href="#i-x"/></svg></button>
+    </header>
+    <div class="dialog-body">
+      <p class="connection-status" id="automatic-connection">Checking installed browsers…</p>
+      <div class="inline-actions">
+        <button type="button" class="btn" id="open-chrome">Open Chrome extensions</button>
+        <button type="button" class="btn" id="open-edge">Open Edge extensions</button>
+        <button type="button" class="btn" id="copy-folder">Copy extension folder path</button>
+        <button type="button" class="btn" id="show-folder">Show extension folder</button>
+      </div>
+      <ol class="setup-steps">
+        <li>Click <strong>Copy extension folder path</strong> above.</li>
+        <li>Open your browser's Extensions page and turn on <strong>Developer mode</strong>.</li>
+        <li>Choose <strong>Load unpacked</strong>, press <kbd>Ctrl</kbd> + <kbd>L</kbd>, paste the path and press <kbd>Enter</kbd>.</li>
+        <li>Select the extension folder itself, then reload your video page.</li>
+      </ol>
+      <p class="field-help">RedX connects to Chrome, Edge and Firefox automatically. Keep the desktop app running while you browse.</p>
+      <details class="manual">
+        <summary>Connection details</summary>
+        <label class="field"><span>Local bridge</span><input id="integration-port" readonly></label>
+        <label class="field"><span>Extension folder</span><input id="extension-path" readonly></label>
+      </details>
+    </div>
+    <footer class="dialog-foot"><span class="spacer"></span><button type="button" class="btn primary" data-close>Done</button></footer>
+  </div>
+</dialog>
+
+<dialog id="scheduler-dialog" aria-labelledby="scheduler-title">
+  <div class="dialog">
+    <header class="dialog-head">
+      <h2 id="scheduler-title">Scheduler</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close"><svg><use href="#i-x"/></svg></button>
+    </header>
+    <div class="dialog-body">
+      <div class="scheduled-list" id="scheduled-list"></div>
+      <p class="field-help">Scheduled downloads start at your local time while RedX Downloader is running. Start queue begins paused and scheduled items immediately.</p>
+      <div class="inline-actions">
+        <button type="button" class="btn" id="schedule-new"><svg><use href="#i-plus"/></svg>Schedule a download</button>
+        <button type="button" class="btn" id="scheduler-start">Start queue</button>
+        <button type="button" class="btn" id="scheduler-stop">Stop queue</button>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="about-dialog" aria-labelledby="about-title" class="about-dialog">
+  <div class="dialog">
+    <header class="dialog-head about-head">
+      <h2 id="about-title" class="sr-only">About RedX Downloader</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close"><svg><use href="#i-x"/></svg></button>
+    </header>
+    <div class="about-body">
+      <svg class="about-mark" aria-hidden="true"><use href="#i-mark"/></svg>
+      <h3 class="about-name">RedX <span>Downloader</span></h3>
+      <p class="about-tag">Fast · Reliable · Secure</p>
+      <p class="about-owner">Owner &amp; Developed by <strong>Abdur Rehman Rajput</strong></p>
+      <p class="about-team">A Project of <strong>Team RedX</strong></p>
+      <p class="about-version" id="about-version">Version 1.0.0</p>
+      <ul class="about-features">
+        <li>Segmented downloads with safe resume</li>
+        <li>SHA-256 verification and duplicate detection</li>
+        <li>Queue, scheduler and live network monitor</li>
+        <li>Browser video capture for Chrome, Edge and Firefox</li>
+      </ul>
+    </div>
+    <footer class="dialog-foot"><span class="spacer"></span><button type="button" class="btn primary" data-close>Close</button></footer>
+  </div>
+</dialog>
+
+<dialog id="confirm-dialog" aria-labelledby="confirm-title">
+  <form method="dialog" class="dialog confirm">
+    <header class="dialog-head"><h2 id="confirm-title">Are you sure?</h2></header>
+    <div class="dialog-body"><p id="confirm-message"></p></div>
+    <footer class="dialog-foot">
+      <span class="spacer"></span>
+      <button class="btn" value="cancel" id="confirm-cancel">Cancel</button>
+      <button class="btn primary" value="ok" id="confirm-ok">Continue</button>
+    </footer>
+  </form>
+</dialog>
+</body>
+</html>
+
